@@ -9,7 +9,10 @@ from anthropic import Anthropic
 from bs4 import BeautifulSoup
 from sentence_transformers import SentenceTransformer
 
+# Load API key — works both locally (.env file) and on Streamlit Cloud (st.secrets)
 load_dotenv()
+if "ANTHROPIC_API_KEY" not in os.environ:
+    os.environ["ANTHROPIC_API_KEY"] = st.secrets.get("ANTHROPIC_API_KEY", "")
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -60,7 +63,11 @@ def load_embedding_model():
 
 @st.cache_resource
 def load_claude_client():
-    return Anthropic()
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        st.error("ANTHROPIC_API_KEY not found. Add it to your .env file locally or to Streamlit secrets in the cloud.")
+        st.stop()
+    return Anthropic(api_key=api_key)
 
 model  = load_embedding_model()
 client = load_claude_client()
