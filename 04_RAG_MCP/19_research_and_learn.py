@@ -672,22 +672,6 @@ with tab1:
     # It overrides the query param for one render cycle so the title is
     # correct before the MutationObserver has a chance to sync the URL.
 
-    st.html('''
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="56" height="40">
-        <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
-        <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
-        <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <path d="M48 25 Q98 25 98 52 Q98 75 48 75" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <path d="M72 75 L100 115" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
-        <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
-        <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
-      </svg>
-      <span style="font-size:0.75rem;font-weight:500;color:#6ee7c7;letter-spacing:2px;text-transform:uppercase;">
-        Research &amp; Learn
-      </span>
-    </div>
-    ''')
     if st.session_state.force_doc_title or active_tab == "doc":
         st.title("📄 Document Chat")
         st.session_state.force_doc_title = False
@@ -761,9 +745,9 @@ with tab1:
 
     # ── Sidebar ───────────────────────────────────────────────────────────────
     with st.sidebar:
-        st.html('''
-        <div style="display:flex;align-items:center;gap:12px;padding:8px 0 12px;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="44" height="31">
+        st.markdown(
+        '''<div style="display:flex;align-items:center;gap:12px;padding:8px 0 14px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="44" height="31" style="flex-shrink:0;">
             <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
             <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
             <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
@@ -772,12 +756,13 @@ with tab1:
             <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
             <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
           </svg>
-          <div>
-            <div style="font-size:1rem;font-weight:700;color:#ffffff;">Research &amp; Learn</div>
-            <div style="font-size:0.7rem;color:#6ee7c7;letter-spacing:1.5px;">POWERED BY CLAUDE AI</div>
+          <div style="line-height:1.3;">
+            <div style="font-size:1rem;font-weight:700;color:#ffffff;font-family:sans-serif;">Research &amp; Learn</div>
+            <div style="font-size:0.65rem;color:#6ee7c7;letter-spacing:1.5px;font-family:sans-serif;">POWERED BY AI</div>
           </div>
-        </div>
-        ''')
+        </div>''',
+        unsafe_allow_html=True
+    )
         st.divider()
 
         # ── Files currently in chat ───────────────────────────────────────────
@@ -937,22 +922,6 @@ Question: {prompt}"""
 # ════════════════════════════════════════════════════════════════════════════════
 
 with tab2:
-    st.html('''
-    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="56" height="40">
-        <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
-        <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
-        <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <path d="M48 25 Q98 25 98 52 Q98 75 48 75" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
-        <path d="M72 75 L100 115" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
-        <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
-        <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
-      </svg>
-      <span style="font-size:0.75rem;font-weight:500;color:#6ee7c7;letter-spacing:2px;text-transform:uppercase;">
-        Research &amp; Learn
-      </span>
-    </div>
-    ''')
     st.title("🔍 Research Agent")
     st.caption(
         "Research any topic. The agent searches the web and compiles a report. "
