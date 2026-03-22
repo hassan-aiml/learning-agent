@@ -147,7 +147,8 @@ def build_collection_from_docs(doc_list: list, collection_name: str):
     if not all_texts:
         return None
 
-    chroma_client = chromadb.PersistentClient(path="./knowledge_base")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    chroma_client = chromadb.PersistentClient(path=os.path.join(base_dir, "knowledge_base"))
     try:
         chroma_client.delete_collection(collection_name)
     except:
@@ -195,6 +196,11 @@ def load_default_docs(folder: str = "my_docs") -> list:
     # the Document Chat feature. Users can upload their own documents,
     # or use the Research Agent to find content and add it to the chat.
     """
+    # Build path relative to this app file — works on Streamlit Cloud
+    # where the working directory may differ from the app file location
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    folder   = os.path.join(base_dir, folder)
+
     if not os.path.exists(folder):
         return []
 
