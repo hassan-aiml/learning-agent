@@ -559,8 +559,7 @@ with tab1:
             "- `.md` — markdown\n"
             "- `.pdf` — PDF (must have selectable text, not scanned)\n"
             "- `.docx` — Word document\n\n"
-            "Uploaded documents are **added** to the current chat — "
-            "they don't replace existing ones."
+            "Uploading a file **replaces** the default resume in chat."
         )
 
         uploaded_file = st.file_uploader(
@@ -572,22 +571,29 @@ with tab1:
         if uploaded_file:
             already_loaded = any(
                 d["name"] == uploaded_file.name
+                and not d["name"].startswith("research:")
                 for d in st.session_state.chat_docs
             )
             if already_loaded:
-                st.warning(f"'{uploaded_file.name}' is already in the chat.")
+                st.warning(f"\'{uploaded_file.name}\' is already in the chat.")
             else:
                 if st.button("Add to chat", type="primary", use_container_width=True):
                     with st.spinner("Extracting and indexing..."):
                         text = extract_text_from_file(uploaded_file)
                     if text.strip():
+                        # Remove default (resume) docs — keep only research docs
+                        # already added, then append the new upload
+                        st.session_state.chat_docs = [
+                            d for d in st.session_state.chat_docs
+                            if d["name"].startswith("research:")
+                        ]
                         st.session_state.chat_docs.append({
                             "name": uploaded_file.name,
                             "text": text
                         })
-                        st.session_state.doc_messages = []  # reset chat
+                        st.session_state.doc_messages = []
                         rebuild_chat_collection()
-                        st.success(f"Added: {uploaded_file.name}")
+                        st.success(f"Loaded: {uploaded_file.name}")
                         st.rerun()
                     else:
                         st.error(
