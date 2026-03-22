@@ -1,0 +1,123 @@
+Hassan M. Hai, PMP, ACP
+512-743-2520 ⬥ Denver, CO ⬥ hassan.hai@gmail.com ⬥ Linkedin.com/in/hassan73/ 
+
+
+
+
+SENIOR ENGINEERING MANAGER – WIRELESS/TECH
+
+Engineering leader recognized for managing teams, processes, and technology solutions across multiple wireless domains. 15+ years of experience leading a pioneer In-building engineering team remaining as a top DAS integrator for the carriers and the enterprise market. In current role at DISH National RF, spearhead high-caliber team in In-building, Small Cell, and Spectrum Engineering. Maintain in-depth knowledge of Multi-Carrier DAS, Small Cells, 4G/5G RAN, Public Safety, and Private Networks. Build trusting relationships with teams, vendors, sub-contractors, and stakeholders at all levels. Deliver competitive solutions, lead presentations, sell the value proposition, and manage pre-sales and post-sales development initiatives. Analytical and passionate about using data to solve problems. Certified in Artificial Intelligence and Machine Learning (AI/ML), with an emphasis on business analytics.
+
+
+
+AREAS OF EXPERTISE
+
+Radio Frequency (RF) Engineering
+Distributed Antenna Systems (DAS)
+Inbuilding & Outdoor Coverage Planning
+Small Cell Deployment
+Spectrum Engineering
+Capacity Planning
+Commissioning & Optimization
+Network Architectures
+4G/5G Radio Access Network (RAN)
+3GPP & O-RAN Standard
+Cloud Technology
+Data Analytics
+Machine Learning (ML)
+Process Engineering 
+Programming & Automation
+Standard Development
+Team Management
+Program Management
+Budgeting & Forecast
+Reports & Dashboards
+Training & Presentation
+
+
+
+
+
+PROFESSIONAL EXPERIENCE
+
+DISH Network Corporation | Denver, CO | 2021-Present
+Senior Engineering Manager – National RF	
+Lead and manage National Inbuilding Design, Small Cell Deployment, and Spectrum Engineering team. Responsible for site survey, RF design, and proposal for Inbuilding coverage solutions – both commercial and private 5G. Drive small cell design, scoping, proposal, and deployment with the markets and 3rd party asset providers. Manage spectrum data, engineering, and license buildout. Interface between the markets, national teams, and agencies to drive collaborative efforts in projects and problem resolutions. Work with product development, solutions engineering, customers, and vendors for the creation, and delivery of products and services. Create MOPs, templates, and standards, and ensure adherence across the organization. Process and analyze data, create models, reports, and dashboards. Create proposals and presentations for executive reviews.  
+
+Survey, design & deploy Inbuilding/DAS, D-RAN, and plug-in solutions for DISH commercial 5G coverage in the headquarter buildings, offices, special events, public venues, and tunnels in the Northeast region. Analyze use cases and requirements, create iBwave design, coverage prediction plots, capacity analysis, and bill of materials for both commercial and private 5G. Create prototype solutions for CBRS/AMBIT/C-band and Wi-Fi services by working closely with the product development group, network, cloud, and device architects.
+Lead nationwide small cell design, scoping and proposal activities with the market and national RF, transport, site development and 3rd party asset providers. Maintain 3PP asset data, provide small cell deployment guidelines, design MOPs and standards. Review market designs, deployment justifications, and compile proposal for executive approval. Evaluate and award 3PP bids. 
+Support requirement specification, RFP evaluation, and testing for the microcell product development. 
+Drive software feature development for the small cell and hub tracking with the deployment operations database. 
+Manage Spectrum Engineering at a National level. Responsible for spectrum data management, creating reports, maps, and dashboards. Coordinate frequencies with NTIA, NOAA, DOD, DOI and other federal agencies, BAS-CARS operators, and cellular carriers. Perform spectrum clearance, cross-border interference mitigation with the domestic and international carriers. Automate spectrum data processing, proximity analysis of cell sites with the satellite earth stations, RF and CIQ data merging, reporting and frequency coordination. Coordinate with agency, regulatory, local market, technical teams, and vendors to develop test plans, create MOPs, and perform tests for frequency coordination. Provide accounting and finance teams with the spectrum related reports they need.
+Buildout for License Protection. Work with the vendors, and system integrators to create designs, and deploy mmWave service solutions. Review designs against FCC license compliance requirements for POPS and area coverage. Reduce project cost by the evaluating the best solution for the coverage scenarios, collocating on the existing towers, optimizing design, comparing vendor solutions, and the total committed cost vs. project valuation. 
+
+
+
+ON AIR SOLUTIONS, INC. | Houston, TX | 2003-2021
+Engineering Manager (2007-2021)	
+Managed and led high-performance engineering team in the design and deployment of wireless systems and technology/product solutions. Facilitated product discussions and presentations to communicate value and support pre-sales and post-sales initiatives. Managed multiple projects simultaneously and directed full scope projects including technical requirements gathering, bid proposal, planning, scheduling forecasting/budgeting, stakeholder communication, risk/quality control, and testing. Leverage data analytics/predictive analysis to measure, analyze, and improve project performance. 
+
+Highlights:
+
+Planned and executed program consisting of 1,500+ Distributed Antenna Systems (DAS), 150+ multi-carrier BTS/Small Cell plug-in, 100+ Small Cell Deployment, 15+ Enterprise RAN solutions across diverse industries.
+Delivered robust designs, beat the competition with competitive bidding, and established the company as the go-to vendor for two major carriers across multiple markets.
+Created and maintained forms and templates for requirement survey, design, bid proposals, deployment, testing, data collection, troubleshooting, and closeout package. 
+
+Projects:
+
+Managed a campus wide DAS deployment project for a large hospital system consisting of 50+ buildings from inception to completion; saved company $2M by equipment reconfiguration and streamlining testing process.
+Built the first indoor 5G mmWave Small Cell network for a major cellular carrier in a 1M sq.ft. warehouse/distribution center. As a result, On Air Solutions was awarded additional projects within the region.
+Executed Indoor & Outdoor DAS deployment for a large airline headquarters campus. Managed customer-development team communication, engineering changes, scope prioritization & system launches. 
+Performed DAS upgrade for a large multi-OEM solution for a university campus covering 282 acres, which involved very creative and complex configuration across the systems.
+
+Systems Engineer (2003-2007)	
+Hired to design and develop company’s website and business applications. Systems engineering and logistics coordination responsibilities were added afterwards. Continued to support and supervise web development. As systems engineer, was responsible for performing site survey, design, proposal, system commissioning, integration, and optimization. Earned recognition within the industry quickly and was often hand-selected by clients to serve as lead engineer on their projects.
+
+Designed 250+ small and medium DAS, both repeater-based coaxial passive, and active fiber DAS.
+Positioned company as VAR partner with OEMs by earning RF Design and Commissioning Certificates.
+Served as Logistics Coordinator for Nextel network deployment for G8 Summit 2004; managed the deployment of new tower sites, colocations, generator backups, Cell on Wheels (COW), and Satellite Cell Site on Light Truck (SatCOLT) units.
+
+
+LITHONIA LIGHTING/METALOPTICS, INC. | Austin, TX | 2001-2002
+Web Developer/Network Associate	
+Designed and developed company’s intranet applications using ASP, J2EE and SQL database. Collected requirements, created prototypes, developed, launched, and maintained applications using the existing infrastructure.
+
+Developed secured project information center for clients for them to view latest updates, progress status, site pictures, and request for information.
+Increased product ordering efficiency by creating product configurator system for the internal users. 
+Reduced and streamlined IT workloads by developing site for driver downloads, instructions, FAQ, forms, support requests and service backlog. 
+Automated machine performance monitoring by developing programs to generate tables and charts from the machine collected data and send automatic notification of anomalies.
+Enhanced user interface and accessibility by converting legacy Visual FoxPro programs to Web Applications.
+
+
+EDUCATION & CREDENTIALS
+
+Bachelor of Arts, Computer Science | UNIVERSITY OF TEXAS AT AUSTIN | Austin, TX
+Postgraduate, Artificial Intelligence & Machine Learning | UNIVERSITY OF TEXAS AT AUSTIN | Austin, TX
+
+
+Certification/Licensure: 
+Project Management Professional (PMP) | Agile Certified Practitioner (PMI-ACP)
+
+iBwave Level 3 | CMA 1000/2000 | CMA ONE | SpiderCloud E-RAN
+
+CommScope Era & ION-E Installation & Commissioning
+
+
+Training:
+Python, Excel (Advanced), SQL, Data Analytics, Machine Learning, AWS, Azure, Product Management
+
+
+TECHNICAL SKILLS
+
+Wireless Technology: CDMA, UMTS, GSM, LTE, 5G-NR, mmWave, CBRS, ERRCS/Public Safety, P25, VHF/UHF, Wi-Fi
+
+Solutions: Repeater, Distributed Antenna Systems (Active, Passive, Hybrid, iDAS & oDAS), Small Cell, RAN equipment, GPS, Fronthaul, Backhaul, Fiber Optics Infrastructure, CAT5/CAT6 Based Systems
+
+OEMs: CommScope, CMA, SOLiD, ADRF, JMA, Optical Zonu, SpiderCloud, Samsung, Nokia, Ericsson, Fujitsu
+
+RF Engineering: Link Budget, Propagation, Coverage Prediction, CW Testing, Benchmark Data Collection, Noise Floor Calculation, Capacity Planning, Interference Analysis, Passive Intermodulation (PIM)
+
+Software: iBwave, Planet, RAN Plan, WINd, Microsoft Office Suite, Google Suite
+
+Data Analytics: Python, Excel, SQL, Power BI, Tableau, Google Data Studio
+AI/ML: Supervised and Unsupervised Learning, Regression, Classification, Ensemble Techniques, Segmentation, Deep Learning, NLP, Computer Vision
