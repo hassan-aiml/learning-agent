@@ -28,26 +28,86 @@ st.html("""
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-/* ── Color tokens ── */
+/* ── Color tokens — navy + teal + amber, matches Option 3 logo ── */
 :root {
-    --teal:       #1a9e7e;
-    --teal-light: #e6f7f2;
-    --teal-mid:   #0f6e56;
-    --amber:      #d97706;
-    --amber-light:#fef3c7;
-    --dark:       #1a1f2e;
-    --dark-mid:   #252b3b;
-    --dark-card:  #2e3548;
-    --text-light: #e2e8f0;
-    --text-muted: #94a3b8;
+    --navy:        #1a1f2e;
+    --navy-mid:    #252b3b;
+    --navy-card:   #2e3548;
+    --teal:        #1a9e7e;
+    --teal-light:  #e6f7f2;
+    --teal-mid:    #0f6e56;
+    --teal-glow:   rgba(26,158,126,0.12);
+    --amber:       #d97706;
+    --amber-light: #fef3c7;
+    --amber-mid:   #92400e;
+    --text-light:  #e2e8f0;
+    --text-muted:  #94a3b8;
+    --text-navy:   #1a1f2e;
 }
 
-/* ── Sidebar: dark background with teal accents ── */
+/* ── Page background: deep navy ── */
+html, body,
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewBlockContainer"],
+.stApp, .main {
+    background-color: var(--navy) !important;
+    color: var(--text-light) !important;
+}
+
+/* ── Content card: slightly lighter navy ── */
+.block-container {
+    background: var(--navy-mid) !important;
+    padding: 1.5rem 2rem !important;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3) !important;
+}
+@media (min-width: 641px) {
+    .block-container {
+        border-radius: 16px !important;
+        margin-top: 1rem !important;
+        border: 0.5px solid #334155 !important;
+    }
+}
+
+/* ── All body text: light ── */
+.block-container p,
+.block-container li,
+.block-container span,
+.block-container label,
+[data-testid="stMarkdownContainer"] p {
+    color: var(--text-light) !important;
+}
+
+/* ── Page titles ── */
+h1, .block-container h1 {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border-bottom: 2px solid var(--teal) !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* ── Subheaders ── */
+h2, .block-container h2 {
+    color: var(--teal-light) !important;
+    font-size: 1.1rem !important;
+}
+h3, .block-container h3 {
+    color: var(--teal) !important;
+    font-size: 1rem !important;
+}
+
+/* ── Caption text ── */
+.stCaption p, small {
+    color: var(--text-muted) !important;
+}
+
+/* ── Sidebar: darkest navy ── */
 section[data-testid="stSidebar"],
 section[data-testid="stSidebar"] > div,
 section[data-testid="stSidebar"] > div > div {
-    background: #1a1f2e !important;
-    background-color: #1a1f2e !important;
+    background: var(--navy) !important;
+    background-color: var(--navy) !important;
+    border-right: 1px solid #2d3650 !important;
 }
 section[data-testid="stSidebar"] * {
     color: var(--text-light) !important;
@@ -61,54 +121,15 @@ section[data-testid="stSidebar"] .stCaption p {
     color: var(--text-muted) !important;
 }
 section[data-testid="stSidebar"] hr {
-    border-color: #334155 !important;
+    border-color: #2d3650 !important;
 }
-/* Sidebar info/warning boxes */
 section[data-testid="stSidebar"] [data-testid="stAlert"] {
-    background: #2e3548 !important;
+    background: var(--navy-card) !important;
     border-left: 3px solid var(--teal) !important;
 }
-/* Sidebar metric */
 section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
     color: var(--teal) !important;
     font-size: 1.4rem !important;
-}
-
-/* ── Main area: page background — targets all browsers including mobile ── */
-html, body, [data-testid="stAppViewContainer"], .stApp,
-[data-testid="stAppViewBlockContainer"], .main {
-    background-color: #f0faf7 !important;
-}
-
-/* Content card — disable rounded card on mobile, keep on desktop */
-.block-container {
-    background: #ffffff !important;
-    padding: 1.5rem 2rem !important;
-    box-shadow: 0 1px 8px rgba(26,158,126,0.08) !important;
-}
-@media (min-width: 641px) {
-    .block-container {
-        border-radius: 12px !important;
-        margin-top: 1rem !important;
-    }
-}
-
-/* ── Page title ── */
-h1, .block-container h1 {
-    color: var(--teal-mid) !important;
-    border-bottom: 2px solid var(--teal-light) !important;
-    padding-bottom: 0.4rem !important;
-    margin-bottom: 1rem !important;
-}
-
-/* ── Section subheaders ── */
-h2, .block-container h2 {
-    color: var(--dark) !important;
-    font-size: 1.1rem !important;
-}
-h3, .block-container h3 {
-    color: var(--teal) !important;
-    font-size: 1rem !important;
 }
 
 /* ── Primary buttons: teal ── */
@@ -118,104 +139,121 @@ h3, .block-container h3 {
     color: #ffffff !important;
     border: none !important;
     border-radius: 8px !important;
-    font-weight: 500 !important;
-    transition: background 0.2s !important;
+    font-weight: 600 !important;
+    transition: background 0.2s, transform 0.1s !important;
 }
 .stButton > button[kind="primary"]:hover,
 [data-testid="stBaseButton-primary"]:hover {
     background: var(--teal-mid) !important;
+    transform: translateY(-1px) !important;
 }
 
 /* ── Secondary buttons ── */
 .stButton > button:not([kind="primary"]),
 [data-testid="stBaseButton-secondary"] {
-    border-color: var(--teal) !important;
+    background: transparent !important;
+    border: 1px solid var(--teal) !important;
     color: var(--teal) !important;
     border-radius: 8px !important;
     transition: all 0.2s !important;
 }
 .stButton > button:not([kind="primary"]):hover,
 [data-testid="stBaseButton-secondary"]:hover {
-    background: var(--teal-light) !important;
+    background: var(--teal-glow) !important;
+    color: #ffffff !important;
 }
 
-/* ── Chat messages ── */
+/* ── Chat bubbles ── */
 [data-testid="stChatMessageContent"] {
     border-radius: 12px !important;
-    background: #fafffe !important;
-    border-left: 3px solid #cbd5e1 !important;
+    background: var(--navy-card) !important;
+    border-left: 3px solid #3d4a6a !important;
+    color: var(--text-light) !important;
 }
-/* User messages: teal tint — :has() works on modern mobile browsers */
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-    background: var(--teal-light) !important;
+    background: #1a3d30 !important;
     border-left: 3px solid var(--teal) !important;
 }
 
-/* ── Chat input box ── */
-[data-testid="stChatInput"] {
+/* ── Chat input ── */
+[data-testid="stChatInput"],
+[data-testid="stChatInput"] textarea {
+    background: var(--navy-card) !important;
     border-color: var(--teal) !important;
     border-radius: 12px !important;
+    color: var(--text-light) !important;
 }
 [data-testid="stChatInput"]:focus-within {
-    box-shadow: 0 0 0 2px rgba(26,158,126,0.2) !important;
+    box-shadow: 0 0 0 2px var(--teal-glow) !important;
 }
 
-/* ── Info / success / warning boxes ── */
+/* ── Alerts / info boxes ── */
+[data-testid="stAlert"] {
+    border-radius: 8px !important;
+    background: var(--navy-card) !important;
+}
 [data-testid="stAlert"][data-baseweb="notification"] {
     border-radius: 8px !important;
 }
 
 /* ── Expanders ── */
 [data-testid="stExpander"] {
-    border: 0.5px solid #d1fae5 !important;
-    border-radius: 8px !important;
-    background: #f9fffe !important;
+    background: var(--navy-card) !important;
+    border: 0.5px solid #334155 !important;
+    border-radius: 10px !important;
 }
 [data-testid="stExpander"] summary {
-    color: var(--teal-mid) !important;
+    color: var(--teal) !important;
     font-weight: 500 !important;
 }
 
 /* ── Dividers ── */
-hr {
-    border-color: #d1fae5 !important;
-}
+hr { border-color: #2d3650 !important; }
 
-/* ── Tab 1 (Document Chat) — teal accent ── */
-button[data-baseweb="tab"]:nth-of-type(1):hover { color: var(--teal) !important; }
-button[data-baseweb="tab"]:nth-of-type(1)[aria-selected="true"] {
-    border-bottom: 3px solid var(--teal) !important;
-    color: var(--teal) !important;
-    font-weight: 600;
-}
+/* ── Metrics ── */
+[data-testid="stMetricValue"] { color: var(--teal) !important; }
+[data-testid="stMetricLabel"] { color: var(--text-muted) !important; }
 
-/* ── Tab 2 (Research Agent) — amber accent ── */
-button[data-baseweb="tab"]:nth-of-type(2):hover { color: var(--amber) !important; }
-button[data-baseweb="tab"]:nth-of-type(2)[aria-selected="true"] {
-    border-bottom: 3px solid var(--amber) !important;
-    color: var(--amber) !important;
-    font-weight: 600;
-}
-
-/* ── Tab bar background ── */
+/* ── Tab bar ── */
 [data-baseweb="tab-list"] {
-    background: #f0faf7 !important;
+    background: var(--navy) !important;
     border-radius: 8px 8px 0 0 !important;
     padding: 4px 4px 0 !important;
+    border-bottom: 1px solid #2d3650 !important;
+}
+button[data-baseweb="tab"] {
+    color: var(--text-muted) !important;
+    font-weight: 500 !important;
+}
+button[data-baseweb="tab"]:nth-of-type(1):hover { color: var(--teal) !important; }
+button[data-baseweb="tab"]:nth-of-type(1)[aria-selected="true"] {
+    background: var(--navy-mid) !important;
+    border-bottom: 3px solid var(--teal) !important;
+    color: var(--teal) !important;
+    font-weight: 700 !important;
+}
+button[data-baseweb="tab"]:nth-of-type(2):hover { color: var(--amber) !important; }
+button[data-baseweb="tab"]:nth-of-type(2)[aria-selected="true"] {
+    background: var(--navy-mid) !important;
+    border-bottom: 3px solid var(--amber) !important;
+    color: var(--amber) !important;
+    font-weight: 700 !important;
 }
 
-/* ── Toggle (show context) ── */
+/* ── Toggle ── */
 [data-testid="stToggle"] input:checked + div {
     background: var(--teal) !important;
 }
 
+/* ── Success / warning badge colors on dark bg ── */
+[data-testid="stAlert"][kind="success"] { border-left: 3px solid var(--teal) !important; }
+[data-testid="stAlert"][kind="warning"] { border-left: 3px solid var(--amber) !important; }
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
-    .block-container { padding: 1rem 0.75rem !important; }
-    h1 { font-size: 1.4rem !important; }
-    .stChatMessage { padding: 0.5rem !important; }
+    .block-container { padding: 1rem 0.75rem !important; border-radius: 0 !important; }
+    h1 { font-size: 1.3rem !important; }
     .stButton > button { font-size: 0.85rem !important; padding: 0.4rem 0.6rem !important; }
-    .stTextInput input { font-size: 0.9rem !important; }
     section[data-testid="stSidebar"] { min-width: 260px !important; }
 }
 
@@ -633,9 +671,26 @@ with tab1:
     # force_doc_title takes priority — set when Start Chatting is clicked.
     # It overrides the query param for one render cycle so the title is
     # correct before the MutationObserver has a chance to sync the URL.
+
+    st.html('''
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="56" height="40">
+        <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
+        <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
+        <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <path d="M48 25 Q98 25 98 52 Q98 75 48 75" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <path d="M72 75 L100 115" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+        <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+      </svg>
+      <span style="font-size:0.75rem;font-weight:500;color:#6ee7c7;letter-spacing:2px;text-transform:uppercase;">
+        Research &amp; Learn
+      </span>
+    </div>
+    ''')
     if st.session_state.force_doc_title or active_tab == "doc":
         st.title("📄 Document Chat")
-        st.session_state.force_doc_title = False  # clear after one render
+        st.session_state.force_doc_title = False
     else:
         st.title("🧠 Research and Learn")
 
@@ -706,7 +761,23 @@ with tab1:
 
     # ── Sidebar ───────────────────────────────────────────────────────────────
     with st.sidebar:
-        st.header("🧠 Research and Learn")
+        st.html('''
+        <div style="display:flex;align-items:center;gap:12px;padding:8px 0 12px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="44" height="31">
+            <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
+            <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
+            <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+            <path d="M48 25 Q98 25 98 52 Q98 75 48 75" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+            <path d="M72 75 L100 115" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
+            <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+            <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+          </svg>
+          <div>
+            <div style="font-size:1rem;font-weight:700;color:#ffffff;">Research &amp; Learn</div>
+            <div style="font-size:0.7rem;color:#6ee7c7;letter-spacing:1.5px;">POWERED BY CLAUDE AI</div>
+          </div>
+        </div>
+        ''')
         st.divider()
 
         # ── Files currently in chat ───────────────────────────────────────────
@@ -866,6 +937,22 @@ Question: {prompt}"""
 # ════════════════════════════════════════════════════════════════════════════════
 
 with tab2:
+    st.html('''
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:8px;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="56" height="40">
+        <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
+        <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
+        <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <path d="M48 25 Q98 25 98 52 Q98 75 48 75" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
+        <path d="M72 75 L100 115" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
+        <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+        <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+      </svg>
+      <span style="font-size:0.75rem;font-weight:500;color:#6ee7c7;letter-spacing:2px;text-transform:uppercase;">
+        Research &amp; Learn
+      </span>
+    </div>
+    ''')
     st.title("🔍 Research Agent")
     st.caption(
         "Research any topic. The agent searches the web and compiles a report. "
