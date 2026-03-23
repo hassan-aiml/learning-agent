@@ -116,6 +116,11 @@ section[data-testid="stSidebar"] > div > div {
 section[data-testid="stSidebar"] * {
     color: var(--text-sidebar) !important;
 }
+section[data-testid="stSidebar"] div[style*="color:#fbbf24"],
+section[data-testid="stSidebar"] span[style*="color:#fbbf24"],
+section[data-testid="stSidebar"] div[style*="color: #fbbf24"] {
+    color: #fbbf24 !important;
+}
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
 section[data-testid="stSidebar"] h3 {
@@ -202,8 +207,8 @@ button[data-testid^="stBaseButton"]:hover {
     color: #ffffff !important;
 }
 [data-testid="stChatMessageAvatarAssistant"] {
-    background-color: #162d4a !important;
-    color: #bfdbfe !important;
+    background-color: #fbbf24 !important;
+    color: #0f172a !important;
 }
 
 /* ── Chat input ── */
@@ -293,35 +298,31 @@ hr { border-color: var(--border) !important; }
 [data-baseweb="tab-list"] {
     background: var(--card-white) !important;
     border-bottom: 2px solid var(--border) !important;
-    padding: 0 !important;
+    padding: 0 4px !important;
+    gap: 4px !important;
 }
 button[data-baseweb="tab"] {
     color: var(--text-hint) !important;
     font-weight: 500 !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 10px 20px !important;
+    transition: background 0.15s, color 0.15s !important;
 }
-button[data-baseweb="tab"]:nth-of-type(1):hover {
+
+/* ── Both tabs: blue highlight when selected, white text ── */
+button[data-baseweb="tab"]:hover {
     color: var(--blue) !important;
     background: var(--blue-light) !important;
-    border-radius: 6px 6px 0 0 !important;
 }
-button[data-baseweb="tab"]:nth-of-type(1)[aria-selected="true"] {
-    background: var(--blue-light) !important;
+button[data-baseweb="tab"][aria-selected="true"] {
+    background: var(--blue) !important;
     border-bottom: 3px solid var(--blue) !important;
-    color: var(--blue) !important;
+    color: #ffffff !important;
     font-weight: 700 !important;
-    border-radius: 6px 6px 0 0 !important;
+    box-shadow: 0 -2px 8px rgba(29,78,216,0.2) !important;
 }
-button[data-baseweb="tab"]:nth-of-type(2):hover {
-    color: #0891b2 !important;
-    background: #ecfeff !important;
-    border-radius: 6px 6px 0 0 !important;
-}
-button[data-baseweb="tab"]:nth-of-type(2)[aria-selected="true"] {
-    background: #ecfeff !important;
-    border-bottom: 3px solid #0891b2 !important;
-    color: #0891b2 !important;
-    font-weight: 700 !important;
-    border-radius: 6px 6px 0 0 !important;
+button[data-baseweb="tab"][aria-selected="true"] * {
+    color: #ffffff !important;
 }
 
 /* ── Toggle ── */
@@ -333,12 +334,65 @@ button[data-baseweb="tab"]:nth-of-type(2)[aria-selected="true"] {
 [data-testid="stAlert"][kind="success"] { border-left: 3px solid #059669 !important; }
 [data-testid="stAlert"][kind="warning"]  { border-left: 3px solid #d97706 !important; }
 
+/* ── Claude-style chat layout — full height, input pinned to bottom ── */
+[data-testid="stChatInput"] {
+    position: sticky !important;
+    bottom: 0 !important;
+    z-index: 50 !important;
+    background: var(--card-white) !important;
+    padding: 8px 0 4px !important;
+}
+/* Give chat messages area breathing room above the pinned input */
+[data-testid="stChatMessage"] {
+    max-width: 780px !important;
+    margin: 0 auto 8px !important;
+}
+/* Limit message width for readability like Claude */
+[data-testid="stChatMessageContent"] {
+    max-width: 720px !important;
+}
+
+/* ── Hide uploaded filename under uploader — shown in Files in Chat instead ── */
+[data-testid="stFileUploaderFileName"],
+[data-testid="stFileUploaderFile"],
+[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"],
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploader"] .uploadedFileName {
+    display: none !important;
+}
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
+
+    /* Push entire app down so Streamlit top bar doesn't overlap the tabs */
+    .stApp > div:first-child { padding-top: 56px !important; }
+    [data-testid="stAppViewContainer"] { padding-top: 56px !important; }
+    header[data-testid="stHeader"] { height: 56px !important; }
+
     .block-container { padding: 0.75rem 0.6rem !important; border-radius: 0 !important; border: none !important; margin-top: 0 !important; }
+
+    /* Tabs: sticky below the top bar with a top offset matching header height */
     [data-testid="stTabs"] { margin-top: 0 !important; padding-top: 0 !important; }
-    [data-baseweb="tab-list"] { position: sticky !important; top: 0 !important; z-index: 100 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; display: flex !important; }
-    button[data-baseweb="tab"] { flex: 1 !important; min-height: 48px !important; font-size: 0.8rem !important; padding: 0 4px !important; justify-content: center !important; touch-action: manipulation !important; }
+    [data-baseweb="tab-list"] {
+        position: sticky !important;
+        top: 56px !important;
+        z-index: 99 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        background: var(--card-white) !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08) !important;
+    }
+    button[data-baseweb="tab"] {
+        flex: 1 !important;
+        min-height: 52px !important;
+        font-size: 0.82rem !important;
+        padding: 0 6px !important;
+        justify-content: center !important;
+        touch-action: manipulation !important;
+    }
+
     h1 { font-size: 1.2rem !important; margin-top: 0.5rem !important; }
     .stButton > button { font-size: 0.85rem !important; }
     section[data-testid="stSidebar"] { min-width: 260px !important; }
@@ -700,6 +754,12 @@ if "force_doc_title"    not in st.session_state:
 if "research_history"   not in st.session_state:
     st.session_state.research_history   = []
 
+if "pending_doc_query"  not in st.session_state:
+    st.session_state.pending_doc_query  = None   # shown at top while processing
+
+if "pending_res_query"  not in st.session_state:
+    st.session_state.pending_res_query  = None   # shown at top while processing
+
 
 # ════════════════════════════════════════════════════════════════════════════════
 # TABS  —  Document Chat is Tab 1 (default)
@@ -798,37 +858,39 @@ with tab1:
     # NOTE: This info box is shown when the default sample document is the only
     # document loaded. It explains what the user can do next.
     doc_names = [d["name"] for d in st.session_state.chat_docs]
+
+    # Auto-remove the default resume as soon as any other doc is present
+    DEFAULT_NAMES = {"hassan_resume.txt", "hassan_resume.md"}
+    has_non_default = any(n not in DEFAULT_NAMES for n in doc_names)
+    if has_non_default:
+        before = len(st.session_state.chat_docs)
+        st.session_state.chat_docs = [
+            d for d in st.session_state.chat_docs
+            if d["name"] not in DEFAULT_NAMES
+        ]
+        if len(st.session_state.chat_docs) != before:
+            doc_names = [d["name"] for d in st.session_state.chat_docs]
+            rebuild_chat_collection()
+
     is_default_only = (
         len(st.session_state.chat_docs) > 0
         and all(
-            name in ["hassan_resume.txt", "hassan_resume.md"]
+            name in DEFAULT_NAMES
             for name in doc_names
         )
     )
-
-    if is_default_only and not st.session_state.doc_messages:
-        st.info(
-            "👋 **Welcome to Learn Smarter!**\n\n"
-            "The default document loaded is **Hassan's resume** — this is just a sample "
-            "to show you how the Document Chat works.\n\n"
-            "**Here's what you can do:**\n"
-            "- 💬 Chat with this sample document right now\n"
-            "- 📂 Upload your own document (.txt, .md, .pdf, .docx) using the sidebar\n"
-            "- 🔍 Switch to the **Research Agent** tab to research any topic, then add "
-            "the findings or source URLs directly to this chat"
-        )
-    elif not st.session_state.chat_docs:
-        st.warning(
-            "No documents loaded. Upload a document in the sidebar or use the "
-            "Research Agent tab to add research content here."
-        )
 
     # ── Dynamic subtitle based on active docs ─────────────────────────────────
     if doc_names:
         if is_default_only:
             st.caption("🧑‍💼 Chatting with: Hassan's resume (sample document)")
         else:
-            st.caption(f"💬 Chatting with: {', '.join(doc_names)}")
+            clean_names = [
+                d["name"].replace("research:", "🔍 ") if d["name"].startswith("research:")
+                else d["name"]
+                for d in st.session_state.chat_docs
+            ]
+            st.caption(f"💬 Chatting with: {', '.join(clean_names)}")
 
     # ── Sidebar ───────────────────────────────────────────────────────────────
     with st.sidebar:
@@ -857,7 +919,7 @@ with tab1:
           </svg>
           <div style="line-height:1.3;">
             <div style="font-size:1rem;font-weight:700;color:#e8f0fe;font-family:sans-serif;">Learn Smarter</div>
-            <div style="font-size:0.65rem;color:#fbbf24;letter-spacing:1.5px;font-family:sans-serif;">AI-POWERED</div>
+            <div style="font-size:0.65rem;color:#fbbf24 !important;letter-spacing:1.5px;font-family:sans-serif;font-weight:600;">AI-POWERED</div>
           </div>
         </div>''',
         unsafe_allow_html=True
@@ -867,18 +929,39 @@ with tab1:
         # ── Files currently in chat ───────────────────────────────────────────
         st.subheader("📂 Files in Chat")
 
+        MAX_BYTES = 5 * 1024 * 1024  # 5 MB
+        used_bytes = sum(len(d["text"].encode("utf-8")) for d in st.session_state.chat_docs)
+        used_mb    = used_bytes / (1024 * 1024)
+        pct        = min(used_bytes / MAX_BYTES, 1.0)
+
+        # Storage meter
+        st.progress(pct, text=f"Storage: {used_mb:.2f} MB / 5.00 MB")
+        if pct >= 1.0:
+            st.error("⚠️ **Storage full.** Remove a document to add more.")
+        elif pct >= 0.8:
+            st.warning(f"⚠️ Nearly full — {(1-pct)*100:.0f}% remaining.")
+
         if st.session_state.chat_docs:
             for i, doc in enumerate(st.session_state.chat_docs):
+                is_research = doc["name"].startswith("research:")
+                is_default  = doc["name"] in ["hassan_resume.txt", "hassan_resume.md"]
+                if is_research:
+                    display_name = doc["name"].replace("research:", "").strip()
+                    icon = "🔍"
+                elif is_default:
+                    display_name = doc["name"]
+                    icon = "🧑‍💼"
+                else:
+                    ext  = os.path.splitext(doc["name"])[1].lower()
+                    icon = {".pdf": "📕", ".docx": "📘", ".md": "📝"}.get(ext, "📄")
+                    display_name = doc["name"]
+                doc_kb = len(doc["text"].encode("utf-8")) / 1024
                 col1, col2 = st.columns([4, 1])
                 with col1:
-                    # Show a small icon based on file type
-                    ext  = os.path.splitext(doc["name"])[1].lower()
-                    icon = {"pdf": "📕", ".docx": "📘", ".md": "📝"}.get(ext, "📄")
-                    st.caption(f"{icon} {doc['name']}")
+                    st.caption(f"{icon} {display_name[:28]}{'…' if len(display_name) > 28 else ''} · {doc_kb:.0f} KB")
                 with col2:
-                    if st.button("✕", key=f"remove_{i}", help=f"Remove {doc['name']}"):
+                    if st.button("✕", key=f"remove_{i}", help=f"Remove {display_name}"):
                         st.session_state.chat_docs.pop(i)
-                        st.session_state.doc_messages = []  # reset chat
                         rebuild_chat_collection()
                         st.rerun()
         else:
@@ -901,7 +984,7 @@ with tab1:
             "- `.md` — markdown\n"
             "- `.pdf` — PDF (must have selectable text, not scanned)\n"
             "- `.docx` — Word document\n\n"
-            "Uploading a file **replaces** the default resume in chat."
+            "Uploaded files and research results are **combined** in chat."
         )
 
         if uploaded_file:
@@ -910,34 +993,53 @@ with tab1:
                 and not d["name"].startswith("research:")
                 for d in st.session_state.chat_docs
             )
+            # Count non-default docs and check combined storage
+            MAX_BYTES = 5 * 1024 * 1024
+            used_bytes = sum(len(d["text"].encode("utf-8")) for d in st.session_state.chat_docs)
+            non_default_count = len([
+                d for d in st.session_state.chat_docs
+                if d["name"] not in ["hassan_resume.txt", "hassan_resume.md"]
+            ])
             if already_loaded:
-                st.warning(f"\'{uploaded_file.name}\' is already in the chat.")
+                st.caption(f"✅ {uploaded_file.name} already in chat.")
+            elif non_default_count >= 3:
+                st.warning(
+                    "⚠️ **Document limit reached.** This free app supports a maximum of "
+                    "**3 documents** in chat at a time. Remove a document from "
+                    "Files in Chat before uploading another."
+                )
             else:
-                if st.button("Add to chat", type="primary", use_container_width=True):
-                    with st.spinner("Extracting and indexing..."):
-                        text = extract_text_from_file(uploaded_file)
-                    if text.strip():
-                        # Remove default (resume) docs — keep only research docs
-                        # already added, then append the new upload
+                with st.spinner("Indexing..."):
+                    text = extract_text_from_file(uploaded_file)
+                if text.strip():
+                    new_bytes = len(text.encode("utf-8"))
+                    if used_bytes + new_bytes > MAX_BYTES:
+                        st.warning(
+                            f"⚠️ **Storage limit reached.** This free app allows a combined "
+                            f"maximum of **5 MB** across all documents. "
+                            f"You are using **{used_bytes/1024/1024:.2f} MB** — this file would "
+                            f"add **{new_bytes/1024/1024:.2f} MB** and exceed the limit. "
+                            f"Remove a document first."
+                        )
+                    else:
                         st.session_state.chat_docs = [
                             d for d in st.session_state.chat_docs
-                            if d["name"].startswith("research:")
+                            if d["name"] not in ["hassan_resume.txt", "hassan_resume.md"]
                         ]
                         st.session_state.chat_docs.append({
                             "name": uploaded_file.name,
                             "text": text
                         })
-                        st.session_state.doc_messages = []
                         rebuild_chat_collection()
-                        st.success(f"Loaded: {uploaded_file.name}")
                         st.rerun()
-                    else:
-                        st.error(
-                            "Could not extract text. Check that your file:\n"
-                            "- Is not password protected\n"
-                            "- Contains selectable text (not a scanned image)\n"
-                            "- Is not corrupted"
-                        )
+                else:
+                    st.error(
+                        "Could not extract text. Check that your file:\n"
+                        "- Is not password protected\n"
+                        "- Contains selectable text (not a scanned image)\n"
+                        "- Is not corrupted"
+                    )
+
 
         st.divider()
 
@@ -947,9 +1049,11 @@ with tab1:
             st.rerun()
 
         if st.button("🔄 Reset to default document", use_container_width=True):
+            # Remove ALL uploaded files, research docs and links, then load default
             default_docs = load_default_docs("my_docs")
-            st.session_state.chat_docs    = default_docs
-            st.session_state.doc_messages = []
+            st.session_state.chat_docs       = default_docs
+            st.session_state.doc_messages    = []
+            st.session_state.research_results = []
             rebuild_chat_collection()
             st.rerun()
 
@@ -957,64 +1061,119 @@ with tab1:
         show_context = st.toggle("Show retrieved context", value=False)
         st.caption("See which document sections were used for each answer.")
 
-    # ── Render messages ───────────────────────────────────────────────────────
-    for message in st.session_state.doc_messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    # ── Chat input ────────────────────────────────────────────────────────────
+    # ── Chat input — TOP of chat area ────────────────────────────────────────
     chat_disabled    = st.session_state.chat_collection is None
     chat_placeholder = (
         "Ask a question about your documents..."
         if not chat_disabled
-        else "Add a document above to start chatting..."
+        else "Upload a document to start chatting..."
     )
 
     if prompt := st.chat_input(chat_placeholder, key="doc_input", disabled=chat_disabled):
+        st.session_state.pending_doc_query = prompt
+        st.rerun()
+
+    # ── Show pending query at the top immediately while processing ────────────
+    if st.session_state.pending_doc_query:
+        pending = st.session_state.pending_doc_query
         with st.chat_message("user"):
-            st.markdown(prompt)
-        st.session_state.doc_messages.append({"role": "user", "content": prompt})
-
-        context = retrieve_context(st.session_state.chat_collection, prompt)
-
-        if show_context:
-            with st.expander("📄 Retrieved document sections", expanded=False):
-                st.text(context)
-
-        doc_label = ", ".join(doc_names) if doc_names else "the documents"
-        augmented = f"""Here is relevant information from {doc_label}:
+            st.markdown(f"**{pending}**")
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking..."):
+                context = retrieve_context(st.session_state.chat_collection, pending)
+                doc_label = ", ".join(doc_names) if doc_names else "the documents"
+                augmented = f"""Here is relevant information from {doc_label}:
 
 {context}
 
 ---
-Question: {prompt}"""
+Question: {pending}"""
+                history = []
+                for msg in [m for m in st.session_state.doc_messages if m["role"] != "_context"]:
+                    history.append({"role": msg["role"], "content": msg["content"]})
+                history.append({"role": "user", "content": augmented})
+                active_system_prompt = build_chat_system_prompt(doc_names)
+                full_response = ""
+                with client.messages.stream(
+                    model="claude-sonnet-4-6",
+                    max_tokens=1024,
+                    system=active_system_prompt,
+                    messages=history
+                ) as stream:
+                    for chunk in stream.text_stream:
+                        full_response += chunk
+                st.markdown(full_response)
 
-        history = []
-        for msg in st.session_state.doc_messages[:-1]:
-            history.append({"role": msg["role"], "content": msg["content"]})
-        history.append({"role": "user", "content": augmented})
+        st.session_state.doc_messages.append({"role": "user", "content": pending})
+        st.session_state.doc_messages.append({"role": "assistant", "content": full_response})
+        if show_context:
+            st.session_state.doc_messages.append({"role": "_context", "content": context})
+        st.session_state.pending_doc_query = None
+        st.rerun()
 
-        active_system_prompt = build_chat_system_prompt(doc_names)
+    # ── Build grouped pairs: [(user_msg, assistant_msg), ...] ──────────────
+    msgs      = st.session_state.doc_messages
+    real_msgs = [m for m in msgs if m["role"] != "_context"]
 
+    # Group into (user, assistant) pairs
+    pairs = []
+    i = 0
+    while i < len(real_msgs):
+        if real_msgs[i]["role"] == "user":
+            user_msg = real_msgs[i]
+            asst_msg = real_msgs[i + 1] if i + 1 < len(real_msgs) and real_msgs[i + 1]["role"] == "assistant" else None
+            pairs.append((user_msg, asst_msg))
+            i += 2 if asst_msg else 1
+        else:
+            i += 1
+
+    if pairs:
+        # ── Latest pair just below the input ────────────────────────────────
+        latest_user, latest_asst = pairs[-1]
+        st.divider()
+        with st.chat_message("user"):
+            st.markdown(latest_user["content"])
+        if latest_asst:
+            with st.chat_message("assistant"):
+                st.markdown(latest_asst["content"])
+
+        if show_context:
+            ctx = next((m["content"] for m in msgs if m["role"] == "_context"), None)
+            if ctx:
+                with st.expander("📄 Retrieved document sections", expanded=False):
+                    st.text(ctx)
+                chunk_count = len(ctx.split("[Document")) - 1
+                if chunk_count > 0:
+                    st.caption(f"Retrieved {chunk_count} document sections")
+
+        # ── Historic pairs below, newest first ───────────────────────────────
+        historic_pairs = pairs[:-1]
+        if historic_pairs:
+            st.divider()
+            st.caption("🕘 **Previous exchanges**")
+            for user_msg, asst_msg in reversed(historic_pairs):
+                with st.container(border=True):
+                    with st.chat_message("user"):
+                        st.markdown(user_msg["content"])
+                    if asst_msg:
+                        with st.chat_message("assistant"):
+                            st.markdown(asst_msg["content"])
+
+    # ── Welcome / empty state ─────────────────────────────────────────────────
+    elif is_default_only:
         with st.chat_message("assistant"):
-            placeholder   = st.empty()
-            full_response = ""
-            with client.messages.stream(
-                model="claude-sonnet-4-6",
-                max_tokens=1024,
-                system=active_system_prompt,
-                messages=history
-            ) as stream:
-                for chunk in stream.text_stream:
-                    full_response += chunk
-                    placeholder.markdown(full_response + "▌")
-            placeholder.markdown(full_response)
-
-        st.session_state.doc_messages.append({
-            "role": "assistant", "content": full_response
-        })
-        chunk_count = len(context.split("[Document")) - 1
-        st.caption(f"Retrieved {chunk_count} document sections")
+            st.markdown(
+                "👋 **Welcome to Learn Smarter!**\n\n"
+                "I've loaded **Hassan's resume** as a sample. Chat with it now, "
+                "upload your own document from the sidebar, or switch to the "
+                "**Research Agent** tab to research any topic."
+            )
+    elif not st.session_state.chat_docs:
+        with st.chat_message("assistant"):
+            st.markdown(
+                "No documents loaded yet. Upload a document from the sidebar "
+                "or add research results from the Research Agent tab."
+            )
 
 
 # ════════════════════════════════════════════════════════════════════════════════
@@ -1025,210 +1184,135 @@ with tab2:
     st.title("🔍 Research Agent")
     st.caption(
         "Research any topic. The agent searches the web and compiles a report. "
-        "You can then **add the report or individual sources to Document Chat** for deeper exploration."
+        "Add results to Document Chat to ask follow-up questions."
     )
-
-    # ── How it works ──────────────────────────────────────────────────────────
-    with st.expander("⚙️ How the research agent works", expanded=False):
-        st.markdown("""
-The research agent uses **agentic looping** — Claude actively searches the web and
-reads pages before responding, rather than answering from memory alone.
-
-**Step by step:**
-1. You submit a research question
-2. Claude decides the best search queries to answer it
-3. It calls `web_search` and reads the results
-4. If a result looks useful, it calls `fetch_page` to read that page in full
-5. It repeats steps 3–4 as needed, then compiles a structured report
-6. The loop stops when Claude has enough information
-
-**Adding research to Document Chat:**
-Each research result and source URL appears below with an **Add to Chat** button.
-Click it to send that content to the Document Chat tab so you can ask follow-up
-questions grounded in the exact sources the agent found.
-
-**What you'll see in the activity log:**
-Each tool call is shown in real time — watch Claude search and reason step by step.
-        """)
-
-    with st.expander("💡 Tips for getting the best research results", expanded=False):
-        st.markdown("""
-**Be specific, not broad**
-- ❌ `"Tell me about AI"` — too vague, results will be shallow
-- ✅ `"What are the most practical AI agent use cases for small businesses in 2025?"` — focused
-
-**Include context**
-- ❌ `"What is RAG?"`
-- ✅ `"What is RAG (retrieval-augmented generation) and how is it used in enterprise chatbots?"`
-
-**Ask for comparisons**
-- `"Compare LangChain vs LlamaIndex for RAG pipelines — pros, cons, when to use each"`
-
-**Ask for actionable outputs**
-- `"What are the top 5 steps a freelance developer should take to land their first AI agent project?"`
-
-**Specify your audience**
-- `"Explain prompt engineering to a non-technical business owner"`
-
-**What the agent is NOT good at:**
-- Very recent breaking news (search index may not have it yet)
-- Pages behind a login or paywall
-- Exact statistics — always verify numbers from the original source
-        """)
+    st.info("⚠️ Only the **2 most recent** research sessions are kept. Older ones are removed automatically.")
 
     st.divider()
 
-    # ── Documents added to chat from research ─────────────────────────────────
-    research_added = [
-        d["name"] for d in st.session_state.chat_docs
-        if d["name"].startswith("research:")
-    ]
+    # ── Prompt input ──────────────────────────────────────────────────────────
+    research_prompt = st.chat_input("Enter a research question...", key="research_input")
 
-    if research_added:
-        st.success(
-            f"✅ {len(research_added)} research item(s) added to Document Chat: "
-            + ", ".join(r.replace("research:", "") for r in research_added)
-        )
-        # ── Start Chatting button — shown once at least one item is added ─────
-        if st.button(
-            "💬 Start Chatting →",
-            type="primary",
-            use_container_width=True,
-            key="start_chatting"
-        ):
-            # Switch to Tab 1 by setting a flag and rerunning.
-            # Streamlit doesn't support programmatic tab switching directly,
-            # so we use a query param to signal the user to click Tab 1.
-            st.session_state.switch_to_chat = True
-            st.rerun()
+    # ── Show pending question + spinner at TOP — history remains visible below ──
+    if st.session_state.pending_res_query:
+        with st.chat_message("user"):
+            st.markdown(f"**{st.session_state.pending_res_query}**")
+        with st.chat_message("assistant"):
+            st.info("🧠 Research in progress — searching the web...")
+        st.divider()
 
-    # ── Selectable research results ───────────────────────────────────────────
-    if st.session_state.research_results:
-        st.subheader("📋 Research Results — Add to Chat")
-        st.caption(
-            "Click **Add to Chat** on any item below to include it in the "
-            "Document Chat tab. The default sample resume will be removed automatically."
-        )
-
-        for i, result in enumerate(st.session_state.research_results):
-            already = any(
-                d["name"] == f"research:{result['label']}"
-                for d in st.session_state.chat_docs
-            )
-            with st.container():
-                col1, col2 = st.columns([5, 1])
-                with col1:
-                    with st.expander(
-                        f"{'✅' if already else '📄'} {result['label']}",
-                        expanded=False
-                    ):
-                        st.text(result["text"][:800] + ("..." if len(result["text"]) > 800 else ""))
-                with col2:
-                    if already:
-                        st.caption("Added ✓")
-                    else:
-                        if st.button(
-                            "Add to Chat",
-                            key=f"add_result_{i}",
-                            use_container_width=True
-                        ):
-                            # Remove default (resume) docs before adding research content
-                            # so the chat is focused only on the selected research material
-                            st.session_state.chat_docs = [
-                                d for d in st.session_state.chat_docs
-                                if d["name"].startswith("research:")
-                            ]
-                            st.session_state.chat_docs.append({
-                                "name": f"research:{result['label']}",
-                                "text": result["text"]
-                            })
-                            st.session_state.doc_messages = []
-                            rebuild_chat_collection()
-                            st.rerun()
+    # ── Action buttons — above the history ───────────────────────────────────
+    if st.session_state.research_history:
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            research_added = [
+                d["name"] for d in st.session_state.chat_docs
+                if d["name"].startswith("research:")
+            ]
+            if research_added:
+                if st.button("💬 Start Chatting →", type="primary", use_container_width=True, key="start_chatting"):
+                    st.session_state.switch_to_chat = True
+                    st.rerun()
+        with col2:
+            if st.button("🗑️ Clear history", use_container_width=True, key="clear_history"):
+                st.session_state.research_history  = []
+                st.session_state.research_results  = []
+                st.session_state.research_messages = []
+                st.session_state.research_log      = []
+                st.rerun()
 
         st.divider()
 
-    # ── Current session activity log ─────────────────────────────────────────
-    if st.session_state.research_log:
-        with st.expander(
-            f"📋 Activity log ({len(st.session_state.research_log)} steps)",
-            expanded=False
-        ):
-            for entry in st.session_state.research_log:
-                st.caption(entry)
-
-    # ── Render current research messages ──────────────────────────────────────
-    for message in st.session_state.research_messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    # ── Clear current research button ─────────────────────────────────────────
-    if st.session_state.research_messages:
-        if st.button("🗑️ Clear current research", key="clear_research"):
-            st.session_state.research_messages = []
-            st.session_state.research_log      = []
-            st.session_state.research_results  = []
-            st.rerun()
-
-    st.divider()
-
-    # ── Research history ──────────────────────────────────────────────────────
+    # ── Show history: latest on top, question + response grouped ─────────────
     if st.session_state.research_history:
-        st.subheader(f"🕘 Research History ({len(st.session_state.research_history)} sessions)")
-        st.caption("Past research sessions — expand any to read the report or add sources to Document Chat.")
-
-        # Show newest first
+        MAX_DOCS = 3
         for h_idx, entry in enumerate(reversed(st.session_state.research_history)):
-            real_idx = len(st.session_state.research_history) - 1 - h_idx
-            with st.expander(
-                f"{'🔍'} {entry['question'][:70]}{'...' if len(entry['question']) > 70 else ''}  "
-                f"·  {entry['steps']} steps",
-                expanded=False
-            ):
-                st.markdown(entry["report"])
-                st.divider()
-                st.caption("**Add sources from this session to Document Chat:**")
-                for r_idx, result in enumerate(entry["results"]):
-                    already = any(
-                        d["name"] == f"research:{result['label']}"
-                        for d in st.session_state.chat_docs
-                    )
-                    col1, col2 = st.columns([5, 1])
-                    with col1:
-                        st.caption(f"{'✅' if already else '📄'} {result['label'][:70]}")
-                    with col2:
-                        if already:
-                            st.caption("Added ✓")
-                        else:
-                            if st.button(
-                                "Add",
-                                key=f"hist_{real_idx}_{r_idx}",
-                                use_container_width=True
-                            ):
-                                st.session_state.chat_docs = [
-                                    d for d in st.session_state.chat_docs
-                                    if d["name"].startswith("research:")
-                                ]
-                                st.session_state.chat_docs.append({
-                                    "name": f"research:{result['label']}",
-                                    "text": result["text"]
-                                })
-                                st.session_state.doc_messages = []
-                                rebuild_chat_collection()
-                                st.rerun()
+            real_idx  = len(st.session_state.research_history) - 1 - h_idx
 
-        if st.button("🗑️ Clear all history", key="clear_history"):
-            st.session_state.research_history = []
-            st.rerun()
+            with st.container(border=True):
+                # Question on top
+                with st.chat_message("user"):
+                    st.markdown(f"**{entry['question']}**")
 
-    # ── Research input ────────────────────────────────────────────────────────
-    if research_prompt := st.chat_input("Enter a research question...", key="research_input"):
+                # Response below question
+                with st.chat_message("assistant"):
+                    st.markdown(entry["report"])
 
-        with st.chat_message("user"):
-            st.markdown(research_prompt)
+                # Sources / result links below response
+                link_results = [r for r in entry["results"] if r.get("type") != "report"]
+                if link_results:
+                    st.caption("**Sources — add to Document Chat:**")
+                    # Count non-default docs currently in chat
+                    non_default_count = len([
+                        d for d in st.session_state.chat_docs
+                        if d["name"] not in ["hassan_resume.txt", "hassan_resume.md"]
+                    ])
+                    for r_idx, result in enumerate(link_results):
+                        rtype  = result.get("type", "url")
+                        icon   = "🔗" if rtype == "url" else "🔎"
+                        label  = result["label"]
+                        already = any(
+                            d["name"] == f"research:{label}"
+                            for d in st.session_state.chat_docs
+                        )
+                        col1, col2 = st.columns([5, 1])
+                        with col1:
+                            st.caption(f"{'✅' if already else icon} {label[:72]}")
+                        with col2:
+                            if already:
+                                st.caption("Added ✓")
+                            elif non_default_count >= MAX_DOCS:
+                                st.caption("⚠️ Limit")
+                            else:
+                                # Also check 5MB combined storage limit
+                                MAX_BYTES    = 5 * 1024 * 1024
+                                used_bytes   = sum(len(d["text"].encode("utf-8")) for d in st.session_state.chat_docs)
+                                new_bytes    = len(result["text"].encode("utf-8"))
+                                over_storage = used_bytes + new_bytes > MAX_BYTES
+                                if over_storage:
+                                    st.caption("⚠️ Full")
+                                elif st.button(
+                                    "Add",
+                                    key=f"hist_{real_idx}_{r_idx}",
+                                    use_container_width=True
+                                ):
+                                    st.session_state.chat_docs = [
+                                        d for d in st.session_state.chat_docs
+                                        if d["name"] not in ["hassan_resume.txt", "hassan_resume.md"]
+                                    ]
+                                    st.session_state.chat_docs.append({
+                                        "name": f"research:{label}",
+                                        "text": result["text"]
+                                    })
+                                    rebuild_chat_collection()
+                                    st.rerun()
+
+                    # Show limit warnings below sources
+                    used_bytes_now = sum(len(d["text"].encode("utf-8")) for d in st.session_state.chat_docs)
+                    if non_default_count >= MAX_DOCS:
+                        st.warning(
+                            "⚠️ **Document limit reached.** This free app supports a maximum of "
+                            "**3 documents** in chat at a time. Remove a document from the "
+                            "sidebar to add another."
+                        )
+                    elif used_bytes_now >= 5 * 1024 * 1024:
+                        st.warning(
+                            "⚠️ **Storage limit reached (5 MB).** This free app limits combined "
+                            "document storage to 5 MB. Remove a document from the sidebar to add more."
+                        )
+
+    # ── Run research when prompt submitted ────────────────────────────────────
+    if research_prompt:
+        st.session_state.pending_res_query = research_prompt
+        st.rerun()
+
+    if st.session_state.pending_res_query:
+        research_prompt = st.session_state.pending_res_query
+        # Question already shown at top — now run the agent
         st.session_state.research_messages.append({"role": "user", "content": research_prompt})
         st.session_state.research_log     = []
         st.session_state.research_results = []
+        st.session_state.pending_res_query = None
 
         messages         = [{"role": "user", "content": research_prompt}]
         step             = 1
@@ -1238,7 +1322,6 @@ Each tool call is shown in real time — watch Claude search and reason step by 
         fetched_pages  = {}  # url → text
         search_results = {}  # query → text
 
-        # Show "research in progress" indicator immediately so user knows it started
         status_container.info("🧠 Research in progress — gathering sources...")
 
         with st.chat_message("assistant"):
@@ -1272,26 +1355,34 @@ Each tool call is shown in real time — watch Claude search and reason step by 
                         "role": "assistant", "content": final_text
                     })
 
-                    # ── Save selectable results ────────────────────────────────
-                    # Add the full report as a selectable item
-                    run_results = [{
-                        "label": f"Full report — {research_prompt[:50]}",
-                        "text":  final_text
-                    }]
-                    st.session_state.research_results.append(run_results[0])
-                    # Add each fetched page as a selectable item
+                    # ── Build result links for this session ───────────────────
+                    run_results = []
+                    # Add each fetched page as a result link
                     for url, text in fetched_pages.items():
-                        entry = {"label": url[:60], "text": text}
-                        st.session_state.research_results.append(entry)
+                        entry = {"label": url, "type": "url", "text": text}
                         run_results.append(entry)
+                    # Add search queries as result links
+                    for query, text in search_results.items():
+                        entry = {"label": f"Search: {query}", "type": "search", "text": text}
+                        run_results.append(entry)
+                    # Add the full report as a result item
+                    run_results.append({
+                        "label": f"Full report",
+                        "type":  "report",
+                        "text":  final_text
+                    })
 
-                    # ── Save to research history ───────────────────────────────
+                    # ── Save to research history — keep only 2 most recent ─────
                     st.session_state.research_history.append({
                         "question": research_prompt,
                         "report":   final_text,
                         "steps":    step - 1,
                         "results":  run_results
                     })
+                    # Trim to last 2 sessions
+                    if len(st.session_state.research_history) > 2:
+                        st.session_state.research_history = st.session_state.research_history[-2:]
+                    st.session_state.research_results = run_results
                     break
 
                 if response.stop_reason == "tool_use":
@@ -1311,9 +1402,13 @@ Each tool call is shown in real time — watch Claude search and reason step by 
 
                             result = run_research_tool(block.name, block.input)
 
-                            # Store fetched page text for "Add to Chat"
+                            # Store fetched pages and search results for history
                             if block.name == "fetch_page":
                                 fetched_pages[block.input.get("url", f"page_{step}")] = result
+                            elif block.name == "web_search":
+                                query = block.input.get("query", f"search_{step}")
+                                if query not in search_results:
+                                    search_results[query] = result
 
                             tool_results.append({
                                 "type": "tool_result",
