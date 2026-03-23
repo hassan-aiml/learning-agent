@@ -16,7 +16,7 @@ if "ANTHROPIC_API_KEY" not in os.environ:
 
 # ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Research and Learn",
+    page_title="Learn Smarter",
     page_icon="🧠",
     layout="centered"
 )
@@ -28,232 +28,319 @@ st.html("""
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 
-/* ── Color tokens — navy + teal + amber, matches Option 3 logo ── */
+/* ── Learn Smarter — Blue Light theme ── */
 :root {
-    --navy:        #1a1f2e;
-    --navy-mid:    #252b3b;
-    --navy-card:   #2e3548;
-    --teal:        #1a9e7e;
-    --teal-light:  #e6f7f2;
-    --teal-mid:    #0f6e56;
-    --teal-glow:   rgba(26,158,126,0.12);
-    --amber:       #d97706;
-    --amber-light: #fef3c7;
-    --amber-mid:   #92400e;
-    --text-light:  #e2e8f0;
-    --text-muted:  #94a3b8;
-    --text-navy:   #1a1f2e;
+    --navy:          #1e3a5f;
+    --navy-mid:      #162d4a;
+    --blue:          #1d4ed8;
+    --blue-mid:      #1e40af;
+    --blue-light:    #eff6ff;
+    --blue-pale:     #f0f7ff;
+    --blue-glow:     rgba(29,78,216,0.12);
+    --sky:           #60a5fa;
+    --sky-light:     #bfdbfe;
+    --card-white:    #ffffff;
+    --border:        #dbeafe;
+    --text-primary:  #1e3a5f;
+    --text-secondary:#3b5f8a;
+    --text-hint:     #94a3b8;
+    --text-sidebar:  #e8f0fe;
 }
 
-/* ── Page background: deep navy ── */
+/* ── Page background: soft ice blue ── */
 html, body,
 [data-testid="stAppViewContainer"],
 [data-testid="stAppViewBlockContainer"],
 .stApp, .main {
-    background-color: var(--navy) !important;
-    color: var(--text-light) !important;
+    background-color: var(--blue-pale) !important;
+    color: var(--text-primary) !important;
 }
 
-/* ── Content card: slightly lighter navy ── */
+/* ── Content card: white ── */
 .block-container {
-    background: var(--navy-mid) !important;
+    background: var(--card-white) !important;
     padding: 1.5rem 2rem !important;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 1px 4px rgba(29,78,216,0.08), 0 2px 10px rgba(29,78,216,0.05) !important;
 }
 @media (min-width: 641px) {
     .block-container {
-        border-radius: 16px !important;
+        border-radius: 12px !important;
         margin-top: 1rem !important;
-        border: 0.5px solid #334155 !important;
+        border: 1px solid var(--border) !important;
     }
 }
 
-/* ── All body text: light ── */
+/* ── Body text ── */
 .block-container p,
 .block-container li,
 .block-container span,
 .block-container label,
 [data-testid="stMarkdownContainer"] p {
-    color: var(--text-light) !important;
+    color: var(--text-primary) !important;
 }
 
 /* ── Page titles ── */
 h1, .block-container h1 {
-    color: #ffffff !important;
+    color: var(--navy) !important;
     font-weight: 700 !important;
-    border-bottom: 2px solid var(--teal) !important;
+    border-bottom: 2px solid var(--sky-light) !important;
     padding-bottom: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.75rem !important;
 }
 
 /* ── Subheaders ── */
 h2, .block-container h2 {
-    color: var(--teal-light) !important;
+    color: var(--text-primary) !important;
     font-size: 1.1rem !important;
+    font-weight: 600 !important;
 }
 h3, .block-container h3 {
-    color: var(--teal) !important;
+    color: var(--blue) !important;
     font-size: 1rem !important;
+    font-weight: 500 !important;
 }
 
-/* ── Caption text ── */
+/* ── Captions ── */
 .stCaption p, small {
-    color: var(--text-muted) !important;
+    color: var(--text-secondary) !important;
 }
 
-/* ── Sidebar: darkest navy ── */
+/* ── Sidebar: deep navy ── */
 section[data-testid="stSidebar"],
 section[data-testid="stSidebar"] > div,
 section[data-testid="stSidebar"] > div > div {
     background: var(--navy) !important;
     background-color: var(--navy) !important;
-    border-right: 1px solid #2d3650 !important;
+    border-right: 1px solid var(--navy-mid) !important;
 }
 section[data-testid="stSidebar"] * {
-    color: var(--text-light) !important;
+    color: var(--text-sidebar) !important;
 }
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
 section[data-testid="stSidebar"] h3 {
-    color: var(--teal) !important;
+    color: var(--sky) !important;
 }
 section[data-testid="stSidebar"] .stCaption p {
-    color: var(--text-muted) !important;
+    color: #93c5fd !important;
 }
 section[data-testid="stSidebar"] hr {
-    border-color: #2d3650 !important;
+    border-color: #2a4a70 !important;
 }
 section[data-testid="stSidebar"] [data-testid="stAlert"] {
-    background: var(--navy-card) !important;
-    border-left: 3px solid var(--teal) !important;
+    background: var(--navy-mid) !important;
+    border-left: 3px solid var(--sky) !important;
 }
 section[data-testid="stSidebar"] [data-testid="stMetricValue"] {
-    color: var(--teal) !important;
+    color: var(--sky) !important;
     font-size: 1.4rem !important;
 }
 
-/* ── Primary buttons: teal ── */
-.stButton > button[kind="primary"],
-[data-testid="stBaseButton-primary"] {
-    background: var(--teal) !important;
+/* ── All buttons: theme blue, white text ── */
+/* Default state: solid blue matching the theme accent */
+.stButton > button,
+[data-testid^="stBaseButton"],
+button[data-testid^="stBaseButton"] {
+    background-color: #1d4ed8 !important;
+    background: #1d4ed8 !important;
     color: #ffffff !important;
     border: none !important;
-    border-radius: 8px !important;
+    border-radius: 6px !important;
     font-weight: 600 !important;
-    transition: background 0.2s, transform 0.1s !important;
+    font-size: 0.875rem !important;
+    box-shadow: 0 1px 3px rgba(29,78,216,0.3) !important;
+    transition: all 0.2s !important;
+    cursor: pointer !important;
 }
-.stButton > button[kind="primary"]:hover,
-[data-testid="stBaseButton-primary"]:hover {
-    background: var(--teal-mid) !important;
+/* Hover state: lighter sky blue — clear contrast with white text */
+.stButton > button:hover,
+[data-testid^="stBaseButton"]:hover,
+button[data-testid^="stBaseButton"]:hover {
+    background-color: #2563eb !important;
+    background: #2563eb !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(29,78,216,0.4) !important;
     transform: translateY(-1px) !important;
 }
 
-/* ── Secondary buttons ── */
-.stButton > button:not([kind="primary"]),
-[data-testid="stBaseButton-secondary"] {
-    background: transparent !important;
-    border: 1px solid var(--teal) !important;
-    color: var(--teal) !important;
-    border-radius: 8px !important;
-    transition: all 0.2s !important;
+/* ── Remove (✕) button: red on hover — clearly destructive ── */
+.stButton > button[title*="Remove"]:hover,
+.stButton > button[title*="remove"]:hover {
+    background-color: #dc2626 !important;
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 6px rgba(220,38,38,0.4) !important;
 }
-.stButton > button:not([kind="primary"]):hover,
-[data-testid="stBaseButton-secondary"]:hover {
-    background: var(--teal-glow) !important;
+
+/* ── Force white text on ALL button states everywhere ── */
+.stButton > button *,
+.stButton > button p,
+.stButton > button span,
+.stButton > button div,
+[data-testid^="stBaseButton"] *,
+[data-testid^="stBaseButton"] p,
+[data-testid^="stBaseButton"] span {
     color: #ffffff !important;
 }
 
 /* ── Chat bubbles ── */
 [data-testid="stChatMessageContent"] {
-    border-radius: 12px !important;
-    background: var(--navy-card) !important;
-    border-left: 3px solid #3d4a6a !important;
-    color: var(--text-light) !important;
+    border-radius: 10px !important;
+    background: #f8fafc !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-primary) !important;
 }
 [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-    background: #1a3d30 !important;
-    border-left: 3px solid var(--teal) !important;
+    background: var(--blue-light) !important;
+    border: 1px solid var(--sky-light) !important;
+    border-left: 3px solid var(--blue) !important;
+}
+
+/* ── Chat avatar icons ── */
+[data-testid="stChatMessageAvatarUser"] {
+    background-color: #1e3a5f !important;
+    color: #ffffff !important;
+}
+[data-testid="stChatMessageAvatarAssistant"] {
+    background-color: #162d4a !important;
+    color: #bfdbfe !important;
 }
 
 /* ── Chat input ── */
 [data-testid="stChatInput"],
 [data-testid="stChatInput"] textarea {
-    background: var(--navy-card) !important;
-    border-color: var(--teal) !important;
-    border-radius: 12px !important;
-    color: var(--text-light) !important;
+    background: #fff8e6 !important;
+    border: 1.5px solid #fbbf24 !important;
+    border-radius: 24px !important;
+    color: var(--text-primary) !important;
+    transition: background 0.2s, border-color 0.2s !important;
 }
-[data-testid="stChatInput"]:focus-within {
-    box-shadow: 0 0 0 2px var(--teal-glow) !important;
+[data-testid="stChatInput"]:focus-within,
+[data-testid="stChatInput"]:focus-within textarea {
+    background: #ffffff !important;
+    border-color: var(--blue) !important;
+    box-shadow: 0 0 0 2px var(--blue-glow) !important;
+    outline: none !important;
 }
 
-/* ── Alerts / info boxes ── */
+/* ── Remove purple/default focus ring on ALL inputs ── */
+*:focus, *:focus-visible {
+    outline-color: var(--blue) !important;
+    outline-width: 2px !important;
+}
+textarea:focus, input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px var(--blue-glow) !important;
+    border-color: var(--blue) !important;
+}
+
+/* ── File uploader drag and drop area ── */
+[data-testid="stFileUploader"] {
+    background: var(--navy) !important;
+    border-radius: 8px !important;
+}
+[data-testid="stFileUploaderDropzone"] {
+    background: var(--navy) !important;
+    border: 2px solid var(--sky) !important;
+    border-radius: 8px !important;
+}
+[data-testid="stFileUploaderDropzone"] * {
+    color: #e8f0fe !important;
+}
+[data-testid="stFileUploaderDropzone"] p,
+[data-testid="stFileUploaderDropzone"] span,
+[data-testid="stFileUploaderDropzone"] small {
+    color: #bfdbfe !important;
+}
+[data-testid="stFileUploaderDropzone"]:hover {
+    border-color: var(--blue) !important;
+    background: var(--navy-mid) !important;
+}
+
+/* ── Alerts ── */
 [data-testid="stAlert"] {
     border-radius: 8px !important;
-    background: var(--navy-card) !important;
+    background: var(--blue-light) !important;
+    border: 1px solid var(--border) !important;
 }
-[data-testid="stAlert"][data-baseweb="notification"] {
+
+/* ── Sidebar info box (accepted formats) — dotted border ── */
+section[data-testid="stSidebar"] [data-testid="stAlert"] {
+    background: var(--navy-mid) !important;
+    border: 2px dotted var(--sky) !important;
     border-radius: 8px !important;
 }
 
 /* ── Expanders ── */
 [data-testid="stExpander"] {
-    background: var(--navy-card) !important;
-    border: 0.5px solid #334155 !important;
-    border-radius: 10px !important;
+    background: var(--card-white) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
 }
 [data-testid="stExpander"] summary {
-    color: var(--teal) !important;
+    color: var(--blue) !important;
     font-weight: 500 !important;
 }
 
 /* ── Dividers ── */
-hr { border-color: #2d3650 !important; }
+hr { border-color: var(--border) !important; }
 
 /* ── Metrics ── */
-[data-testid="stMetricValue"] { color: var(--teal) !important; }
-[data-testid="stMetricLabel"] { color: var(--text-muted) !important; }
+[data-testid="stMetricValue"] { color: var(--blue) !important; }
+[data-testid="stMetricLabel"] { color: var(--text-secondary) !important; }
 
 /* ── Tab bar ── */
 [data-baseweb="tab-list"] {
-    background: var(--navy) !important;
-    border-radius: 8px 8px 0 0 !important;
-    padding: 4px 4px 0 !important;
-    border-bottom: 1px solid #2d3650 !important;
+    background: var(--card-white) !important;
+    border-bottom: 2px solid var(--border) !important;
+    padding: 0 !important;
 }
 button[data-baseweb="tab"] {
-    color: var(--text-muted) !important;
+    color: var(--text-hint) !important;
     font-weight: 500 !important;
 }
-button[data-baseweb="tab"]:nth-of-type(1):hover { color: var(--teal) !important; }
-button[data-baseweb="tab"]:nth-of-type(1)[aria-selected="true"] {
-    background: var(--navy-mid) !important;
-    border-bottom: 3px solid var(--teal) !important;
-    color: var(--teal) !important;
-    font-weight: 700 !important;
+button[data-baseweb="tab"]:nth-of-type(1):hover {
+    color: var(--blue) !important;
+    background: var(--blue-light) !important;
+    border-radius: 6px 6px 0 0 !important;
 }
-button[data-baseweb="tab"]:nth-of-type(2):hover { color: var(--amber) !important; }
-button[data-baseweb="tab"]:nth-of-type(2)[aria-selected="true"] {
-    background: var(--navy-mid) !important;
-    border-bottom: 3px solid var(--amber) !important;
-    color: var(--amber) !important;
+button[data-baseweb="tab"]:nth-of-type(1)[aria-selected="true"] {
+    background: var(--blue-light) !important;
+    border-bottom: 3px solid var(--blue) !important;
+    color: var(--blue) !important;
     font-weight: 700 !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+button[data-baseweb="tab"]:nth-of-type(2):hover {
+    color: #0891b2 !important;
+    background: #ecfeff !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+button[data-baseweb="tab"]:nth-of-type(2)[aria-selected="true"] {
+    background: #ecfeff !important;
+    border-bottom: 3px solid #0891b2 !important;
+    color: #0891b2 !important;
+    font-weight: 700 !important;
+    border-radius: 6px 6px 0 0 !important;
 }
 
 /* ── Toggle ── */
 [data-testid="stToggle"] input:checked + div {
-    background: var(--teal) !important;
+    background: var(--blue) !important;
 }
 
-/* ── Success / warning badge colors on dark bg ── */
-[data-testid="stAlert"][kind="success"] { border-left: 3px solid var(--teal) !important; }
-[data-testid="stAlert"][kind="warning"] { border-left: 3px solid var(--amber) !important; }
+/* ── Alert accents ── */
+[data-testid="stAlert"][kind="success"] { border-left: 3px solid #059669 !important; }
+[data-testid="stAlert"][kind="warning"]  { border-left: 3px solid #d97706 !important; }
 
 /* ── Mobile ── */
 @media (max-width: 640px) {
-    .block-container { padding: 1rem 0.75rem !important; border-radius: 0 !important; }
-    h1 { font-size: 1.3rem !important; }
-    .stButton > button { font-size: 0.85rem !important; padding: 0.4rem 0.6rem !important; }
+    .block-container { padding: 0.75rem 0.6rem !important; border-radius: 0 !important; border: none !important; margin-top: 0 !important; }
+    [data-testid="stTabs"] { margin-top: 0 !important; padding-top: 0 !important; }
+    [data-baseweb="tab-list"] { position: sticky !important; top: 0 !important; z-index: 100 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; display: flex !important; }
+    button[data-baseweb="tab"] { flex: 1 !important; min-height: 48px !important; font-size: 0.8rem !important; padding: 0 4px !important; justify-content: center !important; touch-action: manipulation !important; }
+    h1 { font-size: 1.2rem !important; margin-top: 0.5rem !important; }
+    .stButton > button { font-size: 0.85rem !important; }
     section[data-testid="stSidebar"] { min-width: 260px !important; }
 }
 
@@ -676,7 +763,7 @@ with tab1:
         st.title("📄 Document Chat")
         st.session_state.force_doc_title = False
     else:
-        st.title("🧠 Research and Learn")
+        st.title("🧠 Learn Smarter")
 
 
     # ── JS tab switch when user clicks "Start Chatting" from Research tab ──────
@@ -721,7 +808,7 @@ with tab1:
 
     if is_default_only and not st.session_state.doc_messages:
         st.info(
-            "👋 **Welcome to Research and Learn!**\n\n"
+            "👋 **Welcome to Learn Smarter!**\n\n"
             "The default document loaded is **Hassan's resume** — this is just a sample "
             "to show you how the Document Chat works.\n\n"
             "**Here's what you can do:**\n"
@@ -747,18 +834,30 @@ with tab1:
     with st.sidebar:
         st.markdown(
         '''<div style="display:flex;align-items:center;gap:12px;padding:8px 0 14px;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" width="44" height="31" style="flex-shrink:0;">
-            <rect x="0" y="0" width="200" height="140" rx="28" fill="#1a9e7e"/>
-            <rect x="6" y="6" width="188" height="128" rx="23" fill="none" stroke="white" stroke-width="0.5" opacity="0.2"/>
-            <path d="M48 25 L48 115" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
-            <path d="M48 25 Q98 25 98 52 Q98 75 48 75" stroke="white" stroke-width="12" stroke-linecap="round" fill="none"/>
-            <path d="M72 75 L100 115" stroke="white" stroke-width="10" stroke-linecap="round" fill="none"/>
-            <path d="M123 25 L123 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
-            <path d="M123 115 L168 115" stroke="#fef3c7" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.9"/>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="60" height="60" style="flex-shrink:0;">
+            <rect width="100" height="100" rx="22" fill="#0f172a"/>
+            <circle cx="50" cy="50" r="10" fill="#fbbf24"/>
+            <circle cx="50" cy="50" r="6" fill="#fbbf24"/>
+            <line x1="50" y1="40" x2="50" y2="18" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="50" y1="60" x2="50" y2="82" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="40" y1="50" x2="18" y2="50" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="60" y1="50" x2="82" y2="50" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="43" y1="43" x2="25" y2="25" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+            <line x1="57" y1="43" x2="75" y2="25" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+            <line x1="43" y1="57" x2="25" y2="75" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+            <line x1="57" y1="57" x2="75" y2="75" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="16" r="5.5" fill="#fbbf24" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="50" cy="84" r="5.5" fill="#fbbf24" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="16" cy="50" r="5.5" fill="#fbbf24" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="84" cy="50" r="5.5" fill="#fbbf24" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="25" cy="25" r="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="75" cy="25" r="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="25" cy="75" r="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
+            <circle cx="75" cy="75" r="4" fill="#0f172a" stroke="#fbbf24" stroke-width="1.5"/>
           </svg>
           <div style="line-height:1.3;">
-            <div style="font-size:1rem;font-weight:700;color:#ffffff;font-family:sans-serif;">Research &amp; Learn</div>
-            <div style="font-size:0.65rem;color:#6ee7c7;letter-spacing:1.5px;font-family:sans-serif;">POWERED BY AI</div>
+            <div style="font-size:1rem;font-weight:700;color:#e8f0fe;font-family:sans-serif;">Learn Smarter</div>
+            <div style="font-size:0.65rem;color:#fbbf24;letter-spacing:1.5px;font-family:sans-serif;">AI-POWERED</div>
           </div>
         </div>''',
         unsafe_allow_html=True
@@ -788,7 +887,14 @@ with tab1:
         st.divider()
 
         # ── Upload your own document ──────────────────────────────────────────
-        st.subheader("Upload a Document")
+        st.subheader("Upload Documents")
+
+        uploaded_file = st.file_uploader(
+            "Choose files",
+            type=["txt", "md", "pdf", "docx"],
+            help="Supported: .txt  .md  .pdf  .docx"
+        )
+
         st.info(
             "**Accepted formats:**\n"
             "- `.txt` — plain text\n"
@@ -796,12 +902,6 @@ with tab1:
             "- `.pdf` — PDF (must have selectable text, not scanned)\n"
             "- `.docx` — Word document\n\n"
             "Uploading a file **replaces** the default resume in chat."
-        )
-
-        uploaded_file = st.file_uploader(
-            "Choose a file",
-            type=["txt", "md", "pdf", "docx"],
-            help="Supported: .txt  .md  .pdf  .docx"
         )
 
         if uploaded_file:
@@ -1138,10 +1238,19 @@ Each tool call is shown in real time — watch Claude search and reason step by 
         fetched_pages  = {}  # url → text
         search_results = {}  # query → text
 
+        # Show "research in progress" indicator immediately so user knows it started
+        status_container.info("🧠 Research in progress — gathering sources...")
+
         with st.chat_message("assistant"):
             response_placeholder = st.empty()
 
             while True:
+                # Update status while Claude is thinking between steps
+                if step == 1:
+                    status_container.info("🧠 Research in progress — analysing your question...")
+                else:
+                    status_container.info(f"🧠 Research in progress — processing step {step}...")
+
                 response = client.messages.create(
                     model="claude-sonnet-4-6",
                     max_tokens=4096,
@@ -1157,7 +1266,7 @@ Each tool call is shown in real time — watch Claude search and reason step by 
                             final_text = block.text
                             break
 
-                    status_container.empty()
+                    status_container.success(f"✅ Research complete — {step - 1} steps taken")
                     response_placeholder.markdown(final_text)
                     st.session_state.research_messages.append({
                         "role": "assistant", "content": final_text
